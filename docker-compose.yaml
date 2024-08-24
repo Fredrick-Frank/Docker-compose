@@ -1,0 +1,18 @@
+version: "3"
+
+services:
+ devops:
+   build: ./product
+   volumes:
+     - ./product:/usr/src/app
+   ports:
+     - 5009:80
+
+ website:
+   image: php:apache
+   volumes:
+     - ./website:/var/www/html
+   ports:
+     - 5005:80
+   depends_on:
+     - devops
